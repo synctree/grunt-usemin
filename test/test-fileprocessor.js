@@ -319,6 +319,12 @@ describe('FileProcessor', function() {
       assert.equal(replaced, '<img src="' + filemapping['app/image.png'] + '">');
     });
 
+    it('should replace img reference with revved version', function () {
+      var content = '<img src="image.png" ng-src="{{something}}">';
+      var replaced = fp.replaceWithRevved(content, ['app']);
+      assert.equal(replaced, '<img src="' + filemapping['app/image.png'] + '" ng-src="{{something}}">');
+    });
+
     it('should replace data reference with revved version', function () {
       var content = '<li data-lang="fr" data-src="image.png"></li>';
       var replaced = fp.replaceWithRevved(content, ['app']);
